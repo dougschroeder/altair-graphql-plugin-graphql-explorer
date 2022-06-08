@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import GraphiQLExplorer from 'graphiql-explorer';
-import { buildSchema } from 'graphql';
+import {buildSchema} from 'graphql';
 import './wrapper.css';
 
 const colors = {
@@ -24,12 +24,12 @@ const colors = {
   atom: 'var(--editor-atom-color)',
 };
 
-export const Wrapper = ({ context }) => {
-  const [ appState, setAppState ] = useState({});
-  const [ currentWindowId, setCurrentWindowId ] = useState(null);
+export const Wrapper = ({context}) => {
+  const [appState, setAppState] = useState({});
+  const [currentWindowId, setCurrentWindowId] = useState(null);
   const noop = (...args) => console.log(...args);
   const onEdit = (query) => context.app.setQuery(currentWindowId, query);
-  const setQuery = useCallback(({ windowId, data }) => {
+  const setQuery = useCallback(({windowId, data}) => {
     setAppState((appState) => ({
       ...appState,
       [windowId]: {
@@ -38,7 +38,7 @@ export const Wrapper = ({ context }) => {
       }
     }));
   }, []);
-  const setSDL = useCallback(({ windowId, data }) => {
+  const setSDL = useCallback(({windowId, data}) => {
     setAppState((appState) => ({
       ...appState,
       [windowId]: {
@@ -51,10 +51,13 @@ export const Wrapper = ({ context }) => {
   const initializeCurrentWindowState = (state) => {
     setCurrentWindowId(state.windowId);
     let schema = null;
+    console.log(state);
     if (state.sdl) {
       try {
         schema = buildSchema(state.sdl);
-      } catch(error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     setAppState((appState) => ({
@@ -75,7 +78,7 @@ export const Wrapper = ({ context }) => {
 
     context.events.on('sdl.change', setSDL);
 
-    context.events.on('current-window.change', async({ windowId }) => {
+    context.events.on('current-window.change', async ({windowId}) => {
       const newWindowState = await context.app.getWindowState(windowId);
       initializeCurrentWindowState(newWindowState);
     });
@@ -83,20 +86,20 @@ export const Wrapper = ({ context }) => {
     return () => {
       context.events.off();
     };
-  }, [ setQuery, setSDL ]);
+  }, [setQuery, setSDL]);
 
   if (!appState[currentWindowId]) {
     return null;
   }
 
   return (
-    <GraphiQLExplorer
-      schema={appState[currentWindowId].schema}
-      query={appState[currentWindowId].query}
-      onEdit={(query) => onEdit(query)}
-      explorerIsOpen={true}
-      onToggleExplorer={noop}
-      colors={colors}
-    />
+      <GraphiQLExplorer
+          schema={appState[currentWindowId].schema}
+          query={appState[currentWindowId].query}
+          onEdit={(query) => onEdit(query)}
+          explorerIsOpen={true}
+          onToggleExplorer={noop}
+          colors={colors}
+      />
   );
 };
