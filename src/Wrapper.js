@@ -51,7 +51,6 @@ export const Wrapper = ({context}) => {
   const initializeCurrentWindowState = (state) => {
     setCurrentWindowId(state.windowId);
     let schema = null;
-    console.log(state);
     if (state.sdl) {
       try {
         schema = buildSchema(state.sdl);

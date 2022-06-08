@@ -1,17 +1,45 @@
+.doc-explorer-title-bar .doc-explorer-title {
+  font-weight: bold;
+  padding: 5px 0 0 5px;
+  color: var(--editor-def-color);
+}
+
+.doc-explorer-title-bar .doc-explorer-rhs {
+  display: none;
+}
+
 .graphiql-explorer-root {
   font-size: var(--body-font-size) !important;
   font-family: var(--editor-font-family) !important;
 }
+
+.graphiql-explorer-root .graphiql-operation-title-bar input {
+  padding: 0;
+}
+
 .graphiql-explorer-root svg path {
   fill: var(--theme-font-color) !important;
 }
+
+.graphiql-explorer-root > div {
+  overflow: auto !important;
+}
+
+.graphiql-explorer-root div.graphiql-explorer-node,
+.graphiql-explorer-root div.graphiql-explorer-graphql-arguments,
+.graphiql-explorer-root div.graphiql-explorer-id {
+  overflow: unset !important;
+}
+
 .history-title-bar {
   display: none !important;
 }
+
 div[id^='query-'] {
   padding: 3px;
   border-bottom-color: var(--theme-border-color) !important;
 }
+
 .toolbar-button {
   border-radius: 4px;
   background-color: var(--theme-off-bg-color) !important;
@@ -19,10 +47,22 @@ div[id^='query-'] {
   font-weight: 500 !important;
   transition: all .3s ease;
 }
+
 .toolbar-button:hover {
   color: var(--primary-color);
 }
+
 .variable-editor-title {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+.variable-editor-title select {
+  margin-left: 5px;
+  background-color: var(--theme-bg-color);
+}
+
+.variable-editor-title select option {
+  background-color: var(--theme-bg-color);
+}
+
