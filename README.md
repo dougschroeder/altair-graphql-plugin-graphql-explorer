@@ -23,6 +23,7 @@ https://chrome.google.com/webstore/detail/altair-graphql-client/flnheeellpciglgp
 https://altair.sirmuel.design/docs/plugins/
 
 # Modify Altair Settings to point to locally served plugin
+In the Altair Chrome extension, go to settings, click the "toggle advanced mode" link, add set this JSON:
 
 ```
 {
@@ -35,6 +36,9 @@ https://altair.sirmuel.design/docs/plugins/
     "url:altair-graphql-plugin-graphql-explorer::[url]->[http://localhost:8002]"
   ]
 }
+
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/5340632/184222817-37abb99a-b37b-4da3-b34e-ffde82a341f1.png">
+
 ```
 
 # Restart Chrome Browser Extension
